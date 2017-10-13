@@ -1,0 +1,7 @@
+Install:
+
+    go get [-u] github.com/mdempsky/rangerdanger
+
+Usage:
+
+    rangerdanger cmd/compile/...
