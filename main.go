@@ -44,8 +44,22 @@ func main() {
 }
 
 func danger(s *ast.RangeStmt, pkg *loader.PackageInfo) {
-	if s.Value == nil {
+	switch v := s.Value.(type) {
+	case nil:
+		// "if the range expression is an array or a pointer
+		// to an array and at most one iteration variable is
+		// present, only the range expression's length is
+		// evaluated; if that length is constant, by
+		// definition the range expression itself will not be
+		// evaluated."
 		return
+	case *ast.Ident:
+		// "If the last iteration variable is the blank
+		// identifier, the range clause is equivalent to the
+		// same clause without that identifier."
+		if v.Name == "_" {
+			return
+		}
 	}
 
 	tv := pkg.Types[s.X]
