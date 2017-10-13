@@ -4,4 +4,4 @@ Install:
 
 Usage:
 
-    rangerdanger cmd/compile/...
+    rangerdanger std cmd
